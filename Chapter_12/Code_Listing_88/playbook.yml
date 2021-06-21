@@ -1,0 +1,19 @@
+---
+- name: Handling secret information
+  hosts: load_balancers
+  become: yes
+  gather_facts: false
+
+  tasks:
+    - name: Load encrypted variable
+      include_vars:
+        file: secret_file.yml
+          
+    - name: Retrieve information from the secret_file
+      debug:
+        msg: "{{ password }}"
+
+    - name: Retrieve information from the secret_file but not show output
+      debug:
+        msg: "{{ password }}"
+      no_log: true

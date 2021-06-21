@@ -1,0 +1,18 @@
+---
+- name: Handler restarting httpd service after installation
+  hosts: webservers
+  become: yes
+  gather_facts: false
+
+  tasks:
+    - name: Install apache package
+      yum:
+        name: httpd
+        state: present
+      notify: Restart apache
+
+  handlers:
+    - name: Restart apache
+      service:
+        name: httpd
+        state: restarted

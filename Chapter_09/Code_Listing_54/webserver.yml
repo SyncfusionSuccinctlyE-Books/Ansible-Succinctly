@@ -1,0 +1,9 @@
+---
+- name: Web Server Playbook
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Pinging web server
+      ansible.builtin.ping:
+        data: pong

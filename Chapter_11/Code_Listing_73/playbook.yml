@@ -1,0 +1,12 @@
+---
+- name: Using a jinja2 template
+  hosts: load_balancers
+  gather_facts: false
+  vars:
+    - message: "We love Ansible"
+  
+  tasks:
+    - name: Show the template content
+      debug: 
+        msg: "{{ lookup('template', './webservers.j2') }}"
+

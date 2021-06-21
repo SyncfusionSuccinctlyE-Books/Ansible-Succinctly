@@ -1,0 +1,1 @@
+ansible webservers -m service -a "state=restarted name=sshd" -b

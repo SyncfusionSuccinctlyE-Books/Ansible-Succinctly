@@ -1,0 +1,13 @@
+---
+- name: Using a jinja2 template
+  hosts: load_balancers
+  gather_facts: false
+  vars:
+    - message: "We love Ansible"
+  
+  tasks:
+    - name: Jinja2 template
+      template:
+        src: webservers.j2
+        dest: /home/vagrant
+

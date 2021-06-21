@@ -1,0 +1,1 @@
+ansible [pattern] -m [module] -a "[module options]"

@@ -1,0 +1,1 @@
+ansible webservers -m command -a  "ping www.microsoft.com -c 2"

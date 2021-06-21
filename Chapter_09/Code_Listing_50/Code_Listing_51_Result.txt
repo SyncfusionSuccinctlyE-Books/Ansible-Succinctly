@@ -1,0 +1,12 @@
+(avenv) [vagrant@amgr simple_playbook]$ ansible-playbook webserver.yml
+PLAY [Web Server Playbook] **************************************************************************
+TASK [Gathering Facts] ******************************************************************************
+ok: [193.168.3.161]
+ok: [193.168.3.160]
+TASK [Pinging web server] ***************************************************************************
+ok: [193.168.3.161]
+ok: [193.168.3.160]
+PLAY RECAP ******************************************************************************************
+193.168.3.161 : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+193.168.3.160 : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

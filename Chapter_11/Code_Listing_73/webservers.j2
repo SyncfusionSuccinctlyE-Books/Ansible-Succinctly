@@ -1,0 +1,13 @@
+Available Web Servers:
+
+{# message variable defined in the template #}
+{{ message }}
+
+{# displaying list of hosts as defined in the inventory#}
+{% for host in groups['webservers'] %}
+    {{ host }}
+{% endfor %}
+
+{# message variable defined in the template #}
+Host joined by a comma separated value
+{{ groups['webservers'] | join(",") }}

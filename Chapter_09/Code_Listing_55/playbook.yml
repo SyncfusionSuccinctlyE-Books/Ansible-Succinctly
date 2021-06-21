@@ -1,0 +1,12 @@
+---
+- name: Example with vars
+  hosts: all
+  vars:
+    user_name: john
+    user_description: "standard user"
+
+- name: Example with vars_files
+  hosts: all
+  vars_files:
+    - vars/users.yml
+    - vars/services.yml
