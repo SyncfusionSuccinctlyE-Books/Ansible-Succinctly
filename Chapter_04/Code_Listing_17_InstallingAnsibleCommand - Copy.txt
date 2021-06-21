@@ -1,0 +1,6 @@
+CD C:
+CD C:\AnsibleSuccinctly\Vagrant
+
+vagrant ssg amgr
+
+sudo yum install ansible

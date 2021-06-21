@@ -1,0 +1,4 @@
+mkdir ansible
+cd ansible
+python3 -m venv avenv
+source avenv/bin/activate

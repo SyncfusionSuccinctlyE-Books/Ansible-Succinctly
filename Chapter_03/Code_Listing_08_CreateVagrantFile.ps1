@@ -1,0 +1,1 @@
+New-Item C:\AnsibleSuccinctly\Vagrant\Vagrantfile

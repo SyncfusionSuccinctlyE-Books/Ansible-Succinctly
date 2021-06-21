@@ -1,0 +1,66 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+BOX_IMAGE = "Dougs71/CentOS-8.1.1911"
+BOX_VERSION = "1.0.0"
+
+Vagrant.configure("2") do |config|
+
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = false
+
+  #Ansible manager definition
+  config.vm.define "amgr" do |amgr|
+    amgr.vm.box = BOX_IMAGE
+    amgr.vm.box_version = BOX_VERSION
+    amgr.vm.hostname = 'amgr'
+    amgr.vm.network :private_network, ip: "192.168.3.100"
+    amgr.vm.provider :virtualbox do |v|
+      v.memory = 2048
+      v.cpus = 4
+      v.name = "amgr"
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+  end
+
+  #Load Balancer definition
+  config.vm.define "lb" do |lb|
+    lb.vm.box = BOX_IMAGE
+    lb.vm.box_version = BOX_VERSION
+    lb.vm.hostname = 'lb'
+    lb.vm.network :private_network, ip: "192.168.3.200"
+    lb.vm.provider :virtualbox do |v|
+      v.memory = 1024
+      v.cpus = 1
+      v.name = "lb"
+    end
+  end
+
+  #Database definition
+  config.vm.define "db" do |db|
+    db.vm.box = BOX_IMAGE
+    db.vm.box_version = BOX_VERSION
+    db.vm.hostname = 'db'
+    db.vm.network :private_network, ip: "192.168.3.199"
+    db.vm.provider :virtualbox do |v|
+      v.memory = 1024
+      v.name = "db"
+    end
+  end
+
+  #Creation of the Web Application Servers
+  (160..161).each do |host|
+    config.vm.define "web#{host}" do |web|
+      web.vm.box = BOX_IMAGE
+      web.vm.box_version = BOX_VERSION
+      web.vm.hostname = 'web#{host}'
+      web.vm.network :private_network, ip: "192.168.3.#{host}"
+      web.vm.hostname = "web#{host}"
+      web.vm.provider :virtualbox do |v|
+        v.memory = 1024
+        v.cpus = 1
+        v.name = "web#{host}"
+      end
+    end
+  end
+end
