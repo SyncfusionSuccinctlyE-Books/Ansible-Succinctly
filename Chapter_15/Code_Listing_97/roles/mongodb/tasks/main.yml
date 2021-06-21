@@ -1,0 +1,48 @@
+---
+- name: Add yum MongoDB repository
+  ansible.builtin.template: 
+    src: mongodb-org.repo.j2
+    dest: /etc/yum.repos.d/mongodb-org-{{ mongo_db_version }}.repo
+    mode: 0644
+  tags: [never, mongodbclient, mongodbserver]
+
+- name: Install MongoDB server
+  ansible.builtin.yum:
+    name: mongodb-org
+    update_cache: yes
+    state: present
+  tags: [never, mongodbserver]
+
+- name: Install MongoDB client
+  ansible.builtin.yum:
+    name: mongodb-org-shell
+    update_cache: yes
+    state: present
+  tags: [never, mongodbclient]
+
+- name: Change the MongoDB configuration file
+  ansible.builtin.template: 
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    mode: 0644
+  notify: restart_mongo_db
+  tags: [never, mongodbserver]
+
+- name: Start MongoDB service
+  ansible.builtin.systemd:
+    name: mongod
+    state: started
+  tags: [never, mongodbserver]
+
+- name: Open Firewall Port 27017 
+  ansible.posix.firewalld:
+    zone: public
+    rich_rule: >  
+      rule family="ipv4" source address="{{ hostvars[item].ansible_host }}" 
+      port protocol="tcp" port="{{ mongo_db_server_port }}" accept
+    permanent: yes
+    immediate: yes
+    state: enabled
+  with_items: "{{ groups['webservers'] }}"
+  tags: [never, mongodbserver]
+

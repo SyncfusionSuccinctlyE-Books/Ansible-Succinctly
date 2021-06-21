@@ -1,0 +1,15 @@
+---
+- name: Retrieving facts individually
+  hosts: webservers
+  become: yes
+  gather_facts: true
+
+  tasks:
+    - name: Retrieve server information
+      debug:
+        var: ansible_facts['distribution']
+          
+    - name: Retrieve server information
+      debug:
+        var: ansible_facts['all_ipv4_addresses'].0
+

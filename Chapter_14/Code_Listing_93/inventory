@@ -1,0 +1,6 @@
+[webservers]
+web160
+web161
+
+[load_balancers]
+lb

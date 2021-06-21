@@ -1,0 +1,8 @@
+---
+- name: Installation of the MongoDB client
+  hosts: webservers
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - mongodb

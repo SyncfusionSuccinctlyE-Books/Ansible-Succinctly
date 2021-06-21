@@ -1,0 +1,49 @@
+---
+- hosts: webservers
+  become: true
+  vars:
+    local_git_directory: site
+  
+  tasks:
+    - name: Check out a git repository on the control node
+      local_action: 
+        module: ansible.builtin.git
+        repo: https://github.com/zoranmax/ansible-succinctly-book.git
+        dest: "{{ local_git_directory }}"
+        force: yes
+      run_once: true
+      tags: [never, deploy]
+      
+    - name: Copy web site
+      copy: 
+        src: "{{ local_git_directory }}/website/"
+        dest: /var/www/html 
+      tags: [never, deploy]
+
+    - name: Enable running PHP code on Apache
+      yum: 
+        name: "{{ item }}" 
+        update_cache: yes 
+        state: latest
+      loop:
+        - php
+      notify: restart apache
+  
+    - name: Open firewall 
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        immediate: yes
+        permanent: yes
+      loop:
+        - http
+        - https
+
+    - name: Restart Firewall 
+      systemd: 
+        name: firewalld
+        state: restarted
+
+  roles:
+  - role: geerlingguy.apache
+

@@ -1,0 +1,8 @@
+---
+- name: Installation of the MongoDB database
+  hosts: database
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - mongodb  

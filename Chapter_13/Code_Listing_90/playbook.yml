@@ -1,0 +1,10 @@
+---
+- name: Retrieving and displaying facts
+  hosts: webservers
+  become: yes
+  gather_facts: true
+
+  tasks:
+    - name: Retrieve server information
+      debug:
+        var: ansible_facts

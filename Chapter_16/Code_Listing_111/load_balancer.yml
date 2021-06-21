@@ -1,0 +1,28 @@
+---
+- hosts: loadbalancer
+  become: true
+  vars:
+    haproxy_backend_balance_method: 'roundrobin'
+    haproxy_backend_servers:
+      - name: webserver1
+        address: 192.168.3.160:80
+      - name: webserver2
+        address: 192.168.3.161:80
+
+  tasks:
+    - name: Open firewall 
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        immediate: yes
+        permanent: yes
+      loop:
+        - http
+        - https
+
+    - name: Restart Firewall 
+      systemd: 
+        name: firewalld
+        state: restarted
+  roles:
+  - role: geerlingguy.haproxy

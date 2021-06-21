@@ -1,0 +1,28 @@
+
+---
+- name: Tags Playbook
+  hosts: localhost
+  gather_facts: true
+  connection: local
+  tasks:
+    - name: Display information
+      debug:
+        msg: 
+          - "Distro of {{ ansible_facts['hostname'] }}: {{ ansible_facts['distribution'] }}"
+          - "IP of {{ ansible_facts['hostname'] }}: {{ ansible_default_ipv4.address }}"
+      tags: info
+    
+    - name: Apply changes
+      debug:
+        msg: "Some changes executed"
+      tags: execute
+
+    - name: Post execution 
+      debug: 
+        msg: "Command executed successfully"
+      tags: [info, execute]
+    
+    - name: Never
+      debug: 
+        msg: "This command has to be explicitly called"
+      tags: [never, debug]
