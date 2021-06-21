@@ -1,0 +1,8 @@
+[italy]
+web1.domain.it
+web2.domain.it
+[switzerland]
+web1.domain.ch
+[europe:children]
+italy
+switzerland

@@ -1,0 +1,4 @@
+hosts="web160 web161 db lb"
+for host in $hosts; do
+ ssh-copy-id -i ~/.ssh/id_rsa.pub vagrant@$host -o StrictHostKeyChecking=no -f
+done

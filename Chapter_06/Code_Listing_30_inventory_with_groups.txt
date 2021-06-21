@@ -1,0 +1,10 @@
+[webservers]
+web1.domain.com
+web2.domain.com
+192.168.3.1
+
+[databases]
+db.domain.com
+
+[production]
+web1.domain.com

@@ -1,0 +1,1 @@
+some_server ansible_port=5555 ansible_host=192.0.2.5
