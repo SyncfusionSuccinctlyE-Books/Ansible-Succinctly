@@ -2,7 +2,7 @@
 
 This is the companion repo for [*Ansible Succinctly*](https://www.syncfusion.com/succinctly-free-ebooks/ansible-succinctly) by Zoran Maksimovic. Published by Syncfusion.
 
-[![cover](https://github.com/SyncfusionSuccinctlyE-Books/Ansible-Succinctly/blob/main/cover.png)](https://www.syncfusion.com/succinctly-free-ebooks)
+[![cover](https://github.com/SyncfusionSuccinctlyE-Books/Ansible-Succinctly/blob/main/cover.png)](https://www.syncfusion.com/succinctly-free-ebooks/ansible-succinctly)
 
 ## Looking for more _Succinctly_ titles?
 
